@@ -8,7 +8,7 @@ use Struct\Struct\Contracts\StructInterface;
 
 class Address02 implements StructInterface
 {
-    public string $street;
-    public string $zip;
-    public string $city;
+    public string $street = '';
+    public string $zip = '';
+    public string $city = '';
 }

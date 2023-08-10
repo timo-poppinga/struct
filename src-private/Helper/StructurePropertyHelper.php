@@ -73,13 +73,42 @@ class StructurePropertyHelper
             throw new UnexpectedException(1652187714);
         }
 
+
+
         $structureProperty->type = $type->getName();
         $structureProperty->allowsNull = $type->allowsNull();
         $structureProperty->isBuiltin = $type->isBuiltin();
 
         $structureProperty->hasDefaultValue = $property->hasDefaultValue();
         $structureProperty->defaultValue = $property->getDefaultValue();
-
+        self::readDefaultValueFromAttributes($property, $structureProperty);
         return $structureProperty;
+    }
+
+    protected static function readDefaultValueFromAttributes(ReflectionProperty $property, StructureProperty &$structureProperty): void
+    {
+        $attributes = $property->getAttributes();
+        foreach ($attributes as $attribute) {
+            $name = $attribute->getName();
+            if($name !== 'Struct\Struct\Contracts\Attribute\DefaultValue') {
+                continue;
+            }
+            $attributeArguments = $attribute->getArguments();
+            if(count(($attributeArguments)) !== 1) {
+                continue;
+            }
+            $type = $property->getType();
+            $typeName = $type->getName();
+
+            if (\is_a($typeName, \DateTimeInterface::class, true) === true) {
+                try {
+                    $defaultValue = new \DateTime($attributeArguments[0]);
+                } catch (\Exception $exception) { // @phpstan-ignore-line
+                    throw new UnexpectedException(1675967987, $exception);
+                }
+                $structureProperty->hasDefaultValue = true;
+                $structureProperty->defaultValue = $defaultValue;
+            }
+        }
     }
 }

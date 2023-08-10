@@ -6,12 +6,15 @@ namespace Struct\Struct\Tests\Fixtures\Struct;
 
 use Struct\Struct\Contracts\Attribute\ArrayKeyList;
 use Struct\Struct\Contracts\Attribute\ArrayList;
+use Struct\Struct\Contracts\Attribute\DefaultValue;
 use Struct\Struct\Contracts\StructInterface;
 use Struct\Struct\Tests\Fixtures\Struct\Enum\Category;
 
 class Company implements StructInterface
 {
-    public string $name;
+    public string $name = '';
+
+    #[DefaultValue('2022-05-05 00:00:00')]
     public \DateTimeInterface $foundingDate;
     public Address $address;
     public bool $isActive;
