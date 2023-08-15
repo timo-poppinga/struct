@@ -19,7 +19,7 @@ class StructFactory
     public static function create(string $structureType): StructInterface
     {
         if (\is_a($structureType, StructInterface::class, true) === false) {
-            throw new InvalidStructException(1675967937, 'The structureType <' . $structureType . '> must implement the interface <' . StructInterface::class . '>');
+            throw new InvalidStructException('The structureType <' . $structureType . '> must implement the interface <' . StructInterface::class . '>', 1675967937);
         }
         $structure = new $structureType();
         $properties = StructurePropertyHelper::readProperties($structure);
@@ -73,6 +73,6 @@ class StructFactory
         if (\is_a($type, \UnitEnum::class, true) === true) {
             return $type::cases()[0];
         }
-        throw new InvalidStructException(1675967989, 'The type <' . $type . '> is not supported');
+        throw new InvalidStructException('The type <' . $type . '> is not supported', 1675967989);
     }
 }

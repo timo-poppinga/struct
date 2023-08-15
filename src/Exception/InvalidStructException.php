@@ -9,7 +9,7 @@ use Throwable;
 
 final class InvalidStructException extends LogicException
 {
-    public function __construct(int $code, string $message, ?Throwable $previous = null)
+    public function __construct(string $message, int $code, ?Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }
