@@ -22,12 +22,12 @@ class StructurePropertyHelper
     {
         $structureProperties = [];
         if (\is_a($structure, StructInterface::class, true) === false) {
-            throw new InvalidValueException(1675967847, 'The structure must implement <' . StructInterface::class . '>');
+            throw new InvalidValueException('The structure must implement <' . StructInterface::class . '>', 1675967847);
         }
         $properties = self::getProperties($structure);
         foreach ($properties as $property) {
             if ($property->isPublic() === false) {
-                throw new InvalidValueException(1675967850, 'The property <' . $property->getName() . '> must be public');
+                throw new InvalidValueException('The property <' . $property->getName() . '> must be public', 1675967850);
             }
             $structureProperties[$property->name] = self::buildPropertyReflection($property);
         }
@@ -61,13 +61,13 @@ class StructurePropertyHelper
 
         $type = $property->getType();
         if ($type === null) {
-            throw new InvalidValueException(1652179807, 'The property <' . $property->name . '> must have an type declaration');
+            throw new InvalidValueException('The property <' . $property->name . '> must have an type declaration', 1652179807);
         }
         if (is_a($type, \ReflectionIntersectionType::class) === true) {
-            throw new InvalidValueException(1652179804, 'Intersection type is not supported at property <' . $property->name . '>');
+            throw new InvalidValueException('Intersection type is not supported at property <' . $property->name . '>', 1652179804);
         }
         if (is_a($type, \ReflectionUnionType::class) === true) {
-            throw new InvalidValueException(1652179804, 'Union type is not supported at property <' . $property->name . '>');
+            throw new InvalidValueException('Union type is not supported at property <' . $property->name . '>', 1652179804);
         }
         if (is_a($type, \ReflectionNamedType::class) === false) {
             throw new UnexpectedException(1652187714);

@@ -47,7 +47,7 @@ class HashUtility
         foreach ($reflectionProperties as $reflectionProperty) {
             $propertyName = $reflectionProperty->getName();
             if ($reflectionProperty->isPublic() === false) {
-                throw new InvalidValueException(1651559697, 'The property <' . $propertyName . '> must be public');
+                throw new InvalidValueException('The property <' . $propertyName . '> must be public', 1651559697);
             }
             $propertyNames[] = $propertyName;
         }
@@ -95,7 +95,7 @@ class HashUtility
             return $this->formatObjectValue($value);
         }
 
-        throw new InvalidValueException(1651515873, 'The type of value is not supported');
+        throw new InvalidValueException('The type of value is not supported', 1651515873);
     }
 
     protected function formatEnum(\UnitEnum $enum): mixed
@@ -131,6 +131,6 @@ class HashUtility
         if (\is_a($value, StructInterface::class)) {
             return 'h:' . $this->_buildHashString($value);
         }
-        throw new InvalidValueException(1651521990, 'The type of value is not supported');
+        throw new InvalidValueException('The type of value is not supported', 1651521990);
     }
 }

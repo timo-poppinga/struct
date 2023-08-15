@@ -7,6 +7,7 @@ namespace Struct\Struct\Private\Helper;
 use Struct\Struct\Contracts\Attribute\ArrayKeyList;
 use Struct\Struct\Contracts\Attribute\ArrayList;
 use Struct\Struct\Contracts\StructInterface;
+use Struct\Struct\Exception\InvalidValueException;
 use Struct\Struct\Exception\UnexpectedException;
 use Struct\Struct\Private\Struct\PropertyReflection;
 
@@ -28,7 +29,7 @@ class PropertyReflectionHelper
         foreach ($reflectionProperties as $reflectionProperty) {
             $propertyName = $reflectionProperty->getName();
             if ($reflectionProperty->isPublic() === false) {
-                throw new \InvalidArgumentException('The property <' . $propertyName . '> must be public', 1675967772);
+                throw new InvalidValueException('The property <' . $propertyName . '> must be public', 1675967772);
             }
             $properties[] = self::buildPropertyReflection($reflectionProperty);
         }
@@ -41,13 +42,13 @@ class PropertyReflectionHelper
         $propertyReflection->name = $reflectionProperty->getName();
         $type = $reflectionProperty->getType();
         if ($type === null) {
-            throw new \InvalidArgumentException('The property <' . $propertyReflection->name . '> must have an type declaration', 1652179807);
+            throw new InvalidValueException('The property <' . $propertyReflection->name . '> must have an type declaration', 1652179807);
         }
         if (is_a($type, \ReflectionIntersectionType::class) === true) {
-            throw new \InvalidArgumentException('Intersection type is not supported at property <' . $propertyReflection->name . '>', 1652179804);
+            throw new InvalidValueException('Intersection type is not supported at property <' . $propertyReflection->name . '>', 1652179804);
         }
         if (is_a($type, \ReflectionUnionType::class) === true) {
-            throw new \InvalidArgumentException('Union type is not supported at property <' . $propertyReflection->name . '>', 1652179804);
+            throw new InvalidValueException('Union type is not supported at property <' . $propertyReflection->name . '>', 1652179804);
         }
         if (is_a($type, \ReflectionNamedType::class) === false) {
             throw new UnexpectedException(1652187714);
@@ -72,7 +73,7 @@ class PropertyReflectionHelper
             return;
         }
         if (count($arrayListAttributes) > 0 &&  count($arrayKeyListAttributes) > 0) {
-            throw new \InvalidArgumentException('The property <' . $reflectionProperty->getName() . '> can not be ArrayList and ArrayKeyList', 1652195496);
+            throw new InvalidValueException('The property <' . $reflectionProperty->getName() . '> can not be ArrayList and ArrayKeyList', 1652195496);
         }
 
         $attributes = $arrayListAttributes;

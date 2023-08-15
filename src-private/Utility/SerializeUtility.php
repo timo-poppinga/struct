@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Struct\Struct\Private\Utility;
 
 use Struct\Struct\Contracts\StructInterface;
+use Struct\Struct\Exception\InvalidValueException;
 use Struct\Struct\Exception\UnexpectedException;
 use Struct\Struct\Private\Helper\TransformHelper;
 
@@ -49,7 +50,7 @@ class SerializeUtility
         foreach ($reflectionProperties as $reflectionProperty) {
             $propertyName = $reflectionProperty->getName();
             if ($reflectionProperty->isPublic() === false) {
-                throw new \InvalidArgumentException('The property <' . $propertyName . '> must be public', 1651559697);
+                throw new InvalidValueException('The property <' . $propertyName . '> must be public', 1651559697);
             }
             $propertyNames[] = $propertyName;
         }
@@ -89,7 +90,7 @@ class SerializeUtility
             return $this->formatObjectValue($value);
         }
 
-        throw new \InvalidArgumentException('The type of value is not supported', 1651515873);
+        throw new InvalidValueException('The type of value is not supported', 1651515873);
     }
 
     protected function formatArrayValue(array $value): array
@@ -114,6 +115,6 @@ class SerializeUtility
         if (\is_a($value, StructInterface::class)) {
             return $this->_serialize($value);
         }
-        throw new \InvalidArgumentException('The type of value is not supported', 1651521990);
+        throw new InvalidValueException('The type of value is not supported', 1651521990);
     }
 }

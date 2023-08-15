@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Struct\Struct\Private\Utility;
 
 use Struct\Struct\Contracts\StructInterface;
+use Struct\Struct\Exception\InvalidValueException;
 use Struct\Struct\Exception\TransformException;
 use Struct\Struct\Exception\UnexpectedException;
 use Struct\Struct\Private\Enum\SerializeDataType;
@@ -84,7 +85,7 @@ class UnSerializeUtility
     {
         $dataArray = $this->_transformObjectToArray($data);
         if (is_a($type, StructInterface::class, true) === false) {
-            throw new \InvalidArgumentException('The type: <' . $type . '> must implement <' . StructInterface::class . '>', 1652123590);
+            throw new InvalidValueException('The type: <' . $type . '> must implement <' . StructInterface::class . '>', 1652123590);
         }
         $structure = new $type();
         $propertyReflections = PropertyReflectionHelper::readProperties($structure);
@@ -134,7 +135,7 @@ class UnSerializeUtility
         }
         $type = $propertyReflection->arrayValueType;
         if ($type === null) {
-            throw new \InvalidArgumentException('The array type of property <' . $propertyReflection->name . '> must be declared', 1675967245);
+            throw new InvalidValueException('The array type of property <' . $propertyReflection->name . '> must be declared', 1675967245);
         }
         $parsedOutput = [];
         foreach ($dataArray as $key => $value) {

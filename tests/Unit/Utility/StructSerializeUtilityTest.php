@@ -6,6 +6,7 @@ namespace Struct\Struct\Tests\Unit\Utility;
 
 use PHPUnit\Framework\TestCase;
 use Struct\Struct\Contracts\StructInterface;
+use Struct\Struct\Exception\InvalidValueException;
 use Struct\Struct\Tests\Fixtures\Struct\Company;
 use Struct\Struct\Tests\Fixtures\Struct\Wrong;
 use Struct\Struct\Tests\Preparer\CompanyPreparer;
@@ -44,13 +45,13 @@ class StructSerializeUtilityTest extends TestCase
     public function testInvalidValueException(): void
     {
         $wrong = new Wrong();
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidValueException::class);
         $this->subject->serialize($wrong);
     }
 
     public function testUnSerializeBadType(): StructInterface
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidValueException::class);
         return $this->subject->unSerializeJson($this->expectation, 'ImNotAnStructure');  // @phpstan-ignore-line
     }
 
