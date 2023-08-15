@@ -1,0 +1,10 @@
+{
+    "name": "Musterfirma",
+    "invoiceAddress": {
+        "street": "Musterstraße",
+        "houseNumber": "99",
+        "zip": "99999",
+        "city": "Musterdorf"
+    },
+    "deliveryAddress": null
+}

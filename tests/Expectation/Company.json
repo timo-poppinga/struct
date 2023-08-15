@@ -1,0 +1,69 @@
+{
+    "name": "Musterfirma",
+    "foundingDate": "2000-02-05T14:35:12+01:00",
+    "address": {
+        "street": "Musterstraße",
+        "houseNumber": "99",
+        "zip": "99999",
+        "city": "Musterdorf"
+    },
+    "isActive": true,
+    "category": "cat-technology",
+    "category2": "cat-financial",
+    "properties": {
+        "turnover": "20m",
+        "employees": "100"
+    },
+    "tags": [
+        "industry",
+        "middle size"
+    ],
+    "persons": [
+        {
+            "title": "Geschäftsführer",
+            "firstName": "Max",
+            "middleName": "Maier",
+            "lastName": "Mustermann",
+            "contacts": []
+        },
+        {
+            "title": "Developer",
+            "firstName": "Kai",
+            "lastName": "Kaul",
+            "contacts": [
+                {
+                    "type": "phone",
+                    "value": "+499999999"
+                }
+            ]
+        }
+    ],
+    "age": 20,
+    "roles": {
+        "first": {
+            "name": "blue"
+        },
+        "second": {
+            "name": "green"
+        },
+        "third": {
+            "name": "white"
+        }
+    },
+    "longitude": 8,
+    "latitude": 48.25652,
+    "references": [
+        {
+            "title": "Website Blue GmbH",
+            "technologies": [
+                {
+                    "name": "One CMS",
+                    "country": "Germany"
+                }
+            ]
+        },
+        {
+            "title": "Website Green GmbH"
+        }
+    ]
+}
