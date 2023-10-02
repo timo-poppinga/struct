@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Struct\Struct\Private\Utility;
 
-use Struct\Struct\Contracts\DataTypeInterface;
 use Struct\Struct\Contracts\StructInterface;
 use Struct\Struct\Exception\InvalidValueException;
 use Struct\Struct\Exception\TransformException;
@@ -13,6 +12,7 @@ use Struct\Struct\Private\Enum\SerializeDataType;
 use Struct\Struct\Private\Helper\PropertyReflectionHelper;
 use Struct\Struct\Private\Helper\TransformHelper;
 use Struct\Struct\Private\Struct\PropertyReflection;
+use Struct\DataType\Contracts\DataTypeInterface;
 
 class UnSerializeUtility
 {

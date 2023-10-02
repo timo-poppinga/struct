@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Struct\Struct\Private\Utility;
 
-use Struct\Struct\Contracts\DataTypeInterface;
+
 use Struct\Struct\Contracts\StructInterface;
 use Struct\Struct\Exception\InvalidValueException;
 use Struct\Struct\Exception\UnexpectedException;
+use Struct\DataType\Contracts\DataTypeInterface;
 
 class HashUtility
 {
