@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Struct\Struct\Private\Helper;
 
+use Struct\Struct\Contracts\DataTypeInterface;
 use Struct\Struct\Exception\TransformException;
 
 class TransformHelper

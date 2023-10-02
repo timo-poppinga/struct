@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Struct\Struct\Private\Utility;
 
+use Struct\Struct\Contracts\DataTypeInterface;
 use Struct\Struct\Contracts\StructInterface;
 use Struct\Struct\Exception\InvalidValueException;
 use Struct\Struct\Exception\TransformException;
@@ -33,6 +34,7 @@ class UnSerializeUtility
             SerializeDataType::EnumType => $this->_unSerializeEnum($data, $type),
             SerializeDataType::StructureType  => $this->_unSerializeStructure($data, $type),
             SerializeDataType::ArrayType => $this->_unSerializeArray($data, $propertyReflection),
+            SerializeDataType::DataType => $this->_unSerializeDataType($data, $propertyReflection),
             SerializeDataType::BuildInType => $this->_unSerializeBuildIn($data, $type, $propertyReflection),
         };
         return $result;
@@ -45,6 +47,9 @@ class UnSerializeUtility
         }
         if (is_a($type, \UnitEnum::class, true) === true) {
             return SerializeDataType::EnumType;
+        }
+        if (is_a($type, DataTypeInterface::class, true) === true) {
+            return SerializeDataType::DataType;
         }
         if (is_a($type, StructInterface::class, true) === true) {
             //if (\is_array($data) && \count($data) === 0) {
@@ -126,6 +131,15 @@ class UnSerializeUtility
             return $dataArray;
         }
         throw new UnexpectedException(1676979096);
+    }
+
+    protected function _unSerializeDataType(string|\Stringable $serializedData, PropertyReflection $propertyReflection): DataTypeInterface
+    {
+        $serializedData = (string) $serializedData;
+        /** @var DataTypeInterface $type */
+        $type = $propertyReflection->type;
+        $dataType = $type::deserializeToString($serializedData);
+        return $dataType;
     }
 
     protected function _unSerializeArray(mixed $dataArray, PropertyReflection $propertyReflection): array

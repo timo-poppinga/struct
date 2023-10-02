@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Struct\Struct\Factory;
 
+use Struct\Struct\Contracts\DataTypeInterface;
 use Struct\Struct\Contracts\StructInterface;
 use Struct\Struct\Exception\InvalidStructException;
 use Struct\Struct\Exception\UnexpectedException;
@@ -69,6 +70,10 @@ class StructFactory
             } catch (\Exception $exception) { // @phpstan-ignore-line
                 throw new UnexpectedException(1675967987, $exception);
             }
+        }
+        if (\is_a($type, DataTypeInterface::class, true) === true) {
+            $dataType = new $type();
+            return $dataType;
         }
         if (\is_a($type, \UnitEnum::class, true) === true) {
             return $type::cases()[0];
