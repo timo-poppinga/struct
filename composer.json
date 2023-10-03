@@ -1,11 +1,10 @@
 {
   "name": "struct/struct",
   "license": "MIT",
-  "description": "Simple package for providing structured and more complex data types, similar to 'Struct' in other programming languages",
+  "description": "Simple package structured and more complex data types, similar to 'Struct' in other programming languages",
   "require": {
     "php": "~8.2.7|~8.1.5",
-    "struct/struct-contracts": "^1.0.3",
-    "struct/data-type-contracts": "^1.0.3"
+    "struct/contracts": "^1.0.4"
   },
   "autoload": {
     "psr-4": {

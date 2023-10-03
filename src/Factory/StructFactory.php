@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Struct\Struct\Factory;
 
-use Struct\Struct\Contracts\StructInterface;
-use Struct\Struct\Exception\InvalidStructException;
-use Struct\Struct\Exception\UnexpectedException;
-use Struct\Struct\Private\Helper\StructurePropertyHelper;
+use Struct\Contracts\DataType\DataTypeInterface;
+use Struct\Contracts\StructInterface;
+use Struct\Exception\Serializer\InvalidStructException;
+use Struct\Exception\UnexpectedException;
+use Struct\Serializer\Private\Helper\StructurePropertyHelper;
 use Struct\Struct\Private\Struct\StructureProperty;
-use Struct\DataType\Contracts\DataTypeInterface;
 
 class StructFactory
 {
