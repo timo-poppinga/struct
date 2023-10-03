@@ -14,8 +14,9 @@ use Struct\Struct\Struct\StructureProperty;
 class StructFactory
 {
     /**
-     * @param  class-string<StructInterface> $structureType
-     * @return StructInterface
+     * @template T of StructInterface
+     * @param  class-string<T> $structureType
+     * @return T
      */
     public static function create(string $structureType): StructInterface
     {
