@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Struct\Struct\Private\Struct;
+namespace Struct\Struct\Struct;
 
 class StructureProperty
 {

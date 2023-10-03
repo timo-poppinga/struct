@@ -6,10 +6,10 @@ namespace Struct\Struct\Factory;
 
 use Struct\Contracts\DataType\DataTypeInterface;
 use Struct\Contracts\StructInterface;
-use Struct\Exception\Serializer\InvalidStructException;
+use Struct\Exception\InvalidStructException;
 use Struct\Exception\UnexpectedException;
 use Struct\Serializer\Private\Helper\StructurePropertyHelper;
-use Struct\Struct\Private\Struct\StructureProperty;
+use Struct\Struct\Struct\StructureProperty;
 
 class StructFactory
 {
