@@ -9,7 +9,7 @@ use Struct\Attribute\ArrayList;
 use Struct\Contracts\StructInterface;
 use Struct\Exception\InvalidValueException;
 use Struct\Exception\UnexpectedException;
-use Struct\Serializer\Private\Struct\PropertyReflection;
+use Struct\Struct\Struct\PropertyReflection;
 
 class PropertyReflectionHelper
 {

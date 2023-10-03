@@ -8,8 +8,8 @@ use Struct\Contracts\DataType\DataTypeInterface;
 use Struct\Contracts\StructInterface;
 use Struct\Exception\InvalidStructException;
 use Struct\Exception\UnexpectedException;
-use Struct\Serializer\Private\Helper\StructurePropertyHelper;
 use Struct\Struct\Struct\StructureProperty;
+use Struct\Struct\Utility\StructurePropertyUtility;
 
 class StructFactory
 {
@@ -24,7 +24,7 @@ class StructFactory
             throw new InvalidStructException('The structureType <' . $structureType . '> must implement the interface <' . StructInterface::class . '>', 1675967937);
         }
         $structure = new $structureType();
-        $properties = StructurePropertyHelper::readProperties($structure);
+        $properties = StructurePropertyUtility::readProperties($structure);
         foreach ($properties as $property) {
             $name = $property->name;
             $structure->$name = self::buildValue($property); // @phpstan-ignore-line
