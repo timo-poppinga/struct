@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Struct\Struct\Private\Helper;
+namespace Struct\Struct\Helper;
 
 use Exception\Unexpected\UnexpectedException;
 use Struct\Attribute\ArrayKeyList;
