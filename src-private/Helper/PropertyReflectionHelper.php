@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Struct\Struct\Private\Helper;
 
+use Exception\Unexpected\UnexpectedException;
 use Struct\Attribute\ArrayKeyList;
 use Struct\Attribute\ArrayList;
 use Struct\Contracts\StructInterface;
 use Struct\Exception\InvalidValueException;
-use Struct\Exception\UnexpectedException;
 use Struct\Struct\Struct\PropertyReflection;
 
 class PropertyReflectionHelper

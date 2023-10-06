@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Struct\Struct\Utility;
 
+use Exception\Unexpected\UnexpectedException;
 use ReflectionProperty;
 use Struct\Attribute\DefaultValue;
 use Struct\Contracts\DataType\DataTypeInterface;
 use Struct\Contracts\StructInterface;
 use Struct\Exception\InvalidValueException;
-use Struct\Exception\UnexpectedException;
 use Struct\Struct\Factory\ModelFactory;
 use Struct\Struct\Struct\StructureProperty;
 
