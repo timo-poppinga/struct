@@ -7,6 +7,9 @@ namespace Struct\Struct\Utility;
 use Struct\Contracts\StructInterface;
 use Struct\Struct\Private\Utility\HashUtility;
 
+/**
+ * @deprecated
+ */
 class StructHashUtility
 {
     protected HashUtility $hashUtility;

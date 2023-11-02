@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Struct\Struct\Factory;
 
 use Struct\Contracts\DataType\DataTypeInterface;
+use Struct\Contracts\StructCollectionInterface;
 use Struct\Contracts\StructInterface;
 use Struct\Exception\InvalidStructException;
 use Struct\Struct\Private\Placeholder\Undefined;
@@ -15,15 +16,15 @@ class StructFactory
 {
     /**
      * @template T of StructInterface
-     * @param  class-string<T> $structureType
+     * @param  class-string<T> $structType
      * @return T
      */
-    public static function create(string $structureType): StructInterface
+    public static function create(string $structType): StructInterface
     {
-        if (\is_a($structureType, StructInterface::class, true) === false) {
-            throw new InvalidStructException('The structureType <' . $structureType . '> must implement the interface <' . StructInterface::class . '>', 1675967937);
+        if (\is_a($structType, StructInterface::class, true) === false) {
+            throw new InvalidStructException('The structureType <' . $structType . '> must implement the interface <' . StructInterface::class . '>', 1675967937);
         }
-        $structure = new $structureType();
+        $structure = new $structType();
         $properties = StructurePropertyUtility::readProperties($structure);
         foreach ($properties as $property) {
             $name = $property->name;
@@ -50,6 +51,9 @@ class StructFactory
         $type = $property->type;
         if ($type === 'array') {
             return [];
+        }
+        if (\is_a($type, StructCollectionInterface::class, true) === true) {
+            return new $type();
         }
         if (\is_a($type, StructInterface::class, true) === true) {
             return self::create($type);

@@ -5,15 +5,21 @@ declare(strict_types=1);
 namespace Struct\Struct;
 
 use Struct\Attribute\ArrayList;
+use Struct\Contracts\StructCollectionInterface;
 use Struct\Contracts\StructInterface;
 
-abstract class AbstractStructCollection implements StructInterface, \Countable, \Iterator
+class StructCollection implements StructCollectionInterface
 {
     /**
      * @var array<StructInterface>
      */
     #[ArrayList(StructInterface::class)]
     public array $values = [];
+
+    public function getValues(): array
+    {
+        return $this->values;
+    }
 
     public function count(): int
     {
