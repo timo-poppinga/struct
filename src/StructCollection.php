@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Struct\Struct;
 
-use Struct\Attribute\ArrayList;
 use Struct\Contracts\StructCollectionInterface;
 use Struct\Contracts\StructInterface;
 
@@ -13,12 +12,16 @@ class StructCollection implements StructCollectionInterface
     /**
      * @var array<StructInterface>
      */
-    #[ArrayList(StructInterface::class)]
-    public array $values = [];
+    protected array $values = [];
 
     public function getValues(): array
     {
         return $this->values;
+    }
+
+    public function addValue(StructInterface $struct): void
+    {
+        $this->values[] = $struct;
     }
 
     public function count(): int

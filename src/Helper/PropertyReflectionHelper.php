@@ -74,15 +74,33 @@ class PropertyReflectionHelper
             return;
         }
         $structTypes = $reflectionProperty->getAttributes(StructType::class);
-        if (count($structTypes) !== 1) {
-            throw new InvalidValueException('The property <' . $reflectionProperty->getName() . '> must have an "StructType" attribute', 1652195496);
+        if (count($structTypes) === 1) {
+            $structType = $structTypes[0];
+            $arguments = $structType->getArguments();
+            if (count($arguments) === 0) {
+                throw new UnexpectedException(1698952338);
+            }
+            $structType = $arguments[0];
+            $propertyReflection->structTypeOfArrayOrCollection = $structType;
+            return;
         }
-        $structType = $structTypes[0];
-        $arguments = $structType->getArguments();
-        if (count($arguments) === 0) {
-            throw new UnexpectedException(1698952338);
+
+        $reflection = new \ReflectionClass($propertyReflection->type);
+        try {
+            $methodCurrent = $reflection->getMethod('current');
+        } catch (\Throwable $exception) {
+            throw new UnexpectedException(1698953504, $exception);
         }
-        $propertyReflection->structTypeOfArrayOrCollection = $arguments[0];
+        $returnType = $methodCurrent->getReturnType();
+        if ($returnType instanceof \ReflectionNamedType === false) {
+            throw new UnexpectedException(1698953565);
+        }
+        $structType = $returnType->getName();
+
+        if ($structType === StructInterface::class) {
+            throw new InvalidValueException('The property <' . $reflectionProperty->getName() . '> must have an "StructType" or more specific return value at method current', 1698953636);
+        }
+        $propertyReflection->structTypeOfArrayOrCollection = $structType;
     }
 
     protected static function readArrayAttributes(\ReflectionProperty $reflectionProperty, PropertyReflection $propertyReflection): void
