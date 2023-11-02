@@ -9,6 +9,7 @@ use Struct\Attribute\ArrayKeyList;
 use Struct\Attribute\ArrayList;
 use Struct\Contracts\StructInterface;
 use Struct\Exception\InvalidValueException;
+use Struct\Struct\AbstractStructCollection;
 use Struct\Struct\Struct\PropertyReflection;
 
 class PropertyReflectionHelper
@@ -27,13 +28,26 @@ class PropertyReflectionHelper
         }
         $reflectionProperties = $reflection->getProperties();
         foreach ($reflectionProperties as $reflectionProperty) {
+            if (self::checkProperty($structure, $reflectionProperty) === false) {
+                continue;
+            }
             $propertyName = $reflectionProperty->getName();
-            if ($reflectionProperty->isPublic() === false) {
+            if ($reflectionProperty->isPublic()) {
                 throw new InvalidValueException('The property <' . $propertyName . '> must be public', 1675967772);
             }
             $properties[] = self::buildPropertyReflection($reflectionProperty);
         }
         return $properties;
+    }
+
+    protected static function checkProperty(StructInterface $structure, \ReflectionProperty $reflectionProperty): bool
+    {
+        if ($structure instanceof AbstractStructCollection) {
+            if ($reflectionProperty->getName() === 'currentIndex') {
+                return false;
+            }
+        }
+        return true;
     }
 
     protected static function buildPropertyReflection(\ReflectionProperty $reflectionProperty): PropertyReflection
