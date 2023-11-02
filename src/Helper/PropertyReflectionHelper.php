@@ -38,6 +38,27 @@ class PropertyReflectionHelper
         return $properties;
     }
 
+    /**
+     * @param class-string<StructCollectionInterface> $structCollectionType
+     * @return PropertyReflection
+     */
+    public static function readPropertyOfStructCollection(string $structCollectionType): PropertyReflection
+    {
+        $propertyReflection = new PropertyReflection();
+        $propertyReflection->name = '';
+        $propertyReflection->type = $structCollectionType;
+        $propertyReflection->isAllowsNull = false;
+        $propertyReflection->isHasDefaultValue = false;
+        $propertyReflection->defaultValue = null;
+        $propertyReflection->isBuiltin = false;
+        $structType = self::readTypeByCurrent($propertyReflection->type);
+        if ($structType === StructInterface::class) {
+            throw new InvalidValueException('The StructCollection <' . $structCollectionType . '> must have an more specific return value at method current', 1698959659);
+        }
+        $propertyReflection->structTypeOfArrayOrCollection = $structType;
+        return $propertyReflection;
+    }
+
     protected static function buildPropertyReflection(\ReflectionProperty $reflectionProperty): PropertyReflection
     {
         $propertyReflection = new PropertyReflection();
@@ -84,8 +105,19 @@ class PropertyReflectionHelper
             $propertyReflection->structTypeOfArrayOrCollection = $structType;
             return;
         }
+        $structType = self::readTypeByCurrent($propertyReflection->type);
+        if ($structType === StructInterface::class) {
+            throw new InvalidValueException('The property <' . $reflectionProperty->getName() . '> must have an "StructType" or more specific return value at method current', 1698953636);
+        }
+        $propertyReflection->structTypeOfArrayOrCollection = $structType;
+    }
 
-        $reflection = new \ReflectionClass($propertyReflection->type);
+    /**
+     * @param class-string<StructCollectionInterface> $structCollectionType
+     */
+    protected static function readTypeByCurrent(string $structCollectionType): string
+    {
+        $reflection = new \ReflectionClass($structCollectionType);
         try {
             $methodCurrent = $reflection->getMethod('current');
         } catch (\Throwable $exception) {
@@ -96,11 +128,7 @@ class PropertyReflectionHelper
             throw new UnexpectedException(1698953565);
         }
         $structType = $returnType->getName();
-
-        if ($structType === StructInterface::class) {
-            throw new InvalidValueException('The property <' . $reflectionProperty->getName() . '> must have an "StructType" or more specific return value at method current', 1698953636);
-        }
-        $propertyReflection->structTypeOfArrayOrCollection = $structType;
+        return $structType;
     }
 
     protected static function readArrayAttributes(\ReflectionProperty $reflectionProperty, PropertyReflection $propertyReflection): void

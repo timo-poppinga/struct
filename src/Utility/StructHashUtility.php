@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Struct\Struct\Utility;
 
+use Struct\Contracts\StructCollectionInterface;
 use Struct\Contracts\StructInterface;
 use Struct\Struct\Private\Utility\HashUtility;
 
@@ -19,7 +20,10 @@ class StructHashUtility
         $this->hashUtility = new HashUtility();
     }
 
-    public function buildHash(StructInterface $structure): string
+    /**
+     * @param StructInterface|StructCollectionInterface $structure
+     */
+    public function buildHash(StructInterface|StructCollectionInterface $structure): string
     {
         $hashString = $this->hashUtility->buildHashString($structure);
         return \hash('sha512', $hashString, true);

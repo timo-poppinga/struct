@@ -12,9 +12,14 @@ use Struct\Exception\UnexpectedException;
 
 class HashUtility
 {
-    public function buildHashString(StructInterface $structure): string
+    public function buildHashString(StructInterface|StructCollectionInterface $structure): string
     {
-        $hashString = $this->_buildHashString($structure);
+        if ($structure instanceof StructInterface) {
+            $hashString = $this->_buildHashString($structure);
+        }
+        if ($structure instanceof StructCollectionInterface) {
+            $hashString = $this->formatObjectValue($structure);
+        }
         return $hashString;
     }
 
