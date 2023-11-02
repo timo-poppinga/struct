@@ -1,16 +1,16 @@
 {
-  "name": "struct/struct",
-  "license": "MIT",
-  "description": "Simple package for structured and more complex data types, similar to 'Struct' in other programming languages",
-  "require": {
-    "php": "~8.2.7|~8.1.5",
-    "exception/unexpected" : "1.0.0",
-    "struct/contracts": "^1.4.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "Struct\\Struct\\": "src",
-      "Struct\\Struct\\Private\\": "src-private"
+    "name": "struct/struct",
+    "license": "MIT",
+    "description": "Simple package for structured and more complex data types, similar to 'Struct' in other programming languages",
+    "require": {
+        "php": "~8.2.7|~8.1.5",
+        "exception/unexpected": "1.0.0",
+        "struct/contracts": "^1.4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Struct\\Struct\\": "src",
+            "Struct\\Struct\\Private\\": "src-private"
+        }
     }
-  }
 }
