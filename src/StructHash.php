@@ -8,6 +8,9 @@ use Struct\Contracts\StructCollectionInterface;
 use Struct\Contracts\StructInterface;
 use Struct\Struct\Private\Utility\HashUtility;
 
+/**
+ * @deprecated
+ */
 class StructHash
 {
     public static function buildHash(StructInterface|StructCollectionInterface $structure): string

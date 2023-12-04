@@ -10,6 +10,9 @@ use Struct\Contracts\StructCollectionInterface;
 use Struct\Contracts\StructInterface;
 use Struct\Exception\InvalidStructException;
 
+/**
+ * @deprecated
+ */
 class HashUtility
 {
     public function buildHashString(StructInterface|StructCollectionInterface $structure): string
