@@ -7,6 +7,9 @@ namespace Struct\Struct;
 use Struct\Contracts\StructCollectionInterface;
 use Struct\Contracts\StructInterface;
 
+/**
+ * @deprecated
+ */
 class StructCollection implements StructCollectionInterface
 {
     /**
